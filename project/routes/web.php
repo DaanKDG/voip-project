@@ -16,5 +16,6 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/call', 'PageController@index')->name('call');
 
 Route::get('/home', 'HomeController@index')->name('home');
