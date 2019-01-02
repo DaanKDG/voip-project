@@ -1,0 +1,118 @@
+/* Required for full background image */
+
+html,
+body,
+header,
+.view {
+  height: 110vh;
+  background-color: white;
+}
+
+@media (max-width: 740px) {
+  html,
+  body,
+  header,
+  .view {
+    height: 100vh;
+  }
+}
+
+
+
+h1 {
+  letter-spacing: 8px;
+}
+
+h5 {
+  letter-spacing: 3px;
+}
+
+/*Eigen css */
+
+.header-img {
+  padding-top: 15%;
+  padding-bottom: 5%;
+}
+
+header{
+  position: relative;    
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    0 calc(100% - 5vw)
+  );
+}
+
+.section1{
+  height: 500px;    
+  margin-top: -5vw;
+  background-color: white;  
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    0 calc(100% - 5vw)
+  );
+  
+}
+
+.section2{
+  height: 900px;    
+  margin-top: -5vw;
+  background-color: #7f82a0;  
+  clip-path: polygon(
+    100% 0, 100% 80%, 0 100%, 0 21%
+  );
+}
+
+.section3{
+  height: 700px;     
+  background-color: white;  
+  clip-path: polygon(
+    100% 0, 100% 86%, 0 69%, 0 0
+  );
+}
+
+.section4{
+  height: 700px;      
+  background-color: #7f82a0;  
+  clip-path: polygon(
+    100% 28%, 100% 100%, 0 100%, 0 0
+  );
+}
+
+.padded-title{
+  padding-top: 200px;
+}
+
+.circle1,
+.circle3{
+  width: 190px;
+  height: 190px;
+  background: #7f82a0; 
+  -moz-border-radius: 70px; 
+  -webkit-border-radius: 70px; 
+  border-radius: 150px;  
+  
+  margin: 0 auto; 
+  
+}
+
+.circle2{
+  width: 270px;
+  height: 270px;
+  background: #7f82a0; 
+  -moz-border-radius: 70px; 
+  -webkit-border-radius: 70px; 
+  border-radius: 170px;
+
+  margin:0 auto;
+}
+
+.circle1 h4,
+.circle2 h4,
+.circle3 h4{
+  text-align: center;
+  padding-top: 40%;    
+}
