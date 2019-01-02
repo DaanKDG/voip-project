@@ -51,8 +51,11 @@ header{
   color: white;
 }
 
+header h1{
+  margin-bottom: 5%;
+}
 .section1{
-  height: 500px;    
+  height: 350px;    
   margin-top: -5vw;
   background-color: white;  
   clip-path: polygon(
@@ -150,24 +153,34 @@ header{
 
 /* SECTION 2 */
 .section2 h1{
-  margin-top: 300px;
+  padding-top: 30%;
   margin-bottom: 50px;
   width: 100%;  
 }
 
 .container-fluid{
-  max-width: 1400px;
+  max-width: 2000px;
 }
 .container-fluid .row{
   margin-left: 5%;
 }
 
-
-
+.lus img{
+  
+  display: flex;
+  align-items:center;
+  margin: 0;
+}
+/* .bommas {
+  width: 80%;
+  height: 80%
+} */
+.special-link{
+  margin-top: 60%;
+  margin-left: 15%;
+  width: 100%;  
+}
 .special-link a{
-  margin-top: 100%;
-  margin-left: 50px;
-  width: 100%;
   color: white;
   text-decoration: underline;
 }
@@ -193,7 +206,7 @@ header{
 /* SECTION 4 */
 .section4 h1{
   padding-top: 30%;
-  margin-bottom: 5%;
+  margin-bottom: 8%;
 }
 .section4 form,
 .section4 form input,

@@ -15,8 +15,8 @@
             <!--Grid column-->
             <div class="col-md-12 mb-4 white-text text-center">
                 <img class="header-img" src="{{ asset('/img/logo.svg') }}" alt="" style="width: 48%;" >
-                <h1 class="h1-reponsive white-text font-weight-bold mb-0 pt-md-5 pt-5 wow fadeInDown"
-                data-wow-delay="0.3s"><strong>Creating unexpected friendships since 2018</strong></h1>                
+                <h1 class="h1-reponsive white-text  mb-0 pt-md-5 pt-5 wow fadeInDown"
+                data-wow-delay="0.3s">Creating unexpected friendships since 2018</h1>                
             </div>
             <!--Grid column-->
             </div>
@@ -33,37 +33,48 @@
         <div class="container">            
             <div class="row">
                 <div class="col-sm my-auto">
-                    <div class="circle1">
-                        <img src="{{ asset('img/kader1.svg') }}" alt="">                       
-                    </div>
+                    <a href="#">
+                        <div class="circle1">                        
+                            <img src="{{ asset('img/kader1.svg') }}" alt="">    
+                        </div>
+                    </a>
                 </div>
                 <div class="col-sm my-auto">
-                    <div class="circle2">
-                        <img src="{{ asset('img/telefoon1.svg') }}" alt=""> 
-                    </div>
+                    <a href="#">
+                        <div class="circle2">
+                            <img src="{{ asset('img/telefoon1.svg') }}" alt=""> 
+                        </div>
+                    </a>
                 </div>  
                 <div class="col-sm my-auto">
-                    <div class="circle3">
-                        <img src="{{ asset('img/contact1.svg') }}" alt=""> 
-                    </div>
+                    <a href="#">
+                        <div class="circle3">
+                            <img src="{{ asset('img/contact1.svg') }}" alt=""> 
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>  
     </section> 
     <section class="section2">        
         <div class="container-fluid">            
-                <div class="row">
-                    <h1>Portretten van al onze bellers.</h1>
-                    <div class="col">                        
-                        <div class="bommas">
-                            <img src="{{ asset('img/bommas.svg') }}" alt="">                       
-                        </div>                                            
-                    </div>
+                <div class="row"> .
                     <div class="col col-lg-2">
-                        <div class="special-link">
-                            <a href="#"><h2>Alle portretten bekijken =></h2></a>  
+                        <img src="{{ asset('img/lus5.svg') }}" alt="" style="width:40%;">  
+                    </div>  
+                    <div class="col">
+                        <h1 class="text-center">Portretten van al onze bellers.</h1>
+                        <div class="col">
+                            <div class="bommas">
+                                <img src="{{ asset('img/bommas.svg') }}" alt="">                       
+                            </div>                                            
                         </div>
-                    </div>                  
+                        <div class="col col-lg-4">
+                            <div class="special-link">
+                                <a href="#"><h2>Alle portretten bekijken =></h2></a>  
+                            </div>
+                        </div>      
+                    </div>            
                 </div>               
         </div>
     </section> 
@@ -92,7 +103,7 @@
     </section> 
     <section class="section4">
         <div class="container">
-            <h1>Je kan ons steeds contacteren via </h1>
+            <h1 class="text-center">Je kan ons steeds contacteren via </h1>
             <form>
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">04 99 84 69 34</label>
