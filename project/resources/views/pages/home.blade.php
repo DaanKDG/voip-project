@@ -54,22 +54,10 @@
         <div class="container-fluid">            
                 <div class="row">
                     <h1>Portretten van al onze bellers.</h1>
-                    <div class="col">
-                        <div class="col-sm">
-                            <div class="bomma1">
-                                <img src="{{ asset('img/bomma1.svg') }}" alt="">                       
-                            </div>
-                        </div>
-                        <div class="col-sm">
-                            <div class="bomma2">
-                                <img src="{{ asset('img/bomma3.svg') }}" alt="">                                                       
-                            </div>
-                        </div>    
-                        <div class="col-sm">
-                            <div class="bomma3">
-                                <img src="{{ asset('img/bomma2.svg') }}" alt=""> 
-                            </div>
-                        </div>
+                    <div class="col">                        
+                        <div class="bommas">
+                            <img src="{{ asset('img/bommas.svg') }}" alt="">                       
+                        </div>                                            
                     </div>
                     <div class="col col-lg-2">
                         <div class="special-link">
@@ -81,7 +69,7 @@
     </section> 
     <section class="section3">
         <div class="container"> 
-            <h1>5 minuten van uw tijd voor een glimlach</h1>
+            <h1 class="text-center">5 minuten van uw tijd voor een glimlach</h1>
             <div class="row">
                 <div class="col-sm my-auto">
                     <div class="circle2">
@@ -96,17 +84,29 @@
                         een oudere die zich eenzaam voelt.
                         Ik wil nu bellen
                         <br>
-                        <a href="#">Ik wil nu bellen</a>
+                        <a href="#">Ik wil nu bellen =></a>
                     </h3>    
                 </div>
-            </div>
-           
+            </div>           
         </div>
     </section> 
     <section class="section4">
-        <div class="container">            
-            <h1 class="padded-title">Section4</h1>
+        <div class="container">
             <h1>Je kan ons steeds contacteren via </h1>
+            <form>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">04 99 84 69 34</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="email" placeholder="e-mailadress">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Hello@cava.com</label>
+                    <div class="col-sm-10">
+                        <textarea type="text" class="form-control" id="message" placeholder="bericht..." rows="4"></textarea>
+                    </div>
+                </div>
+            </form>
         </div>
     </section> 
 </main>
