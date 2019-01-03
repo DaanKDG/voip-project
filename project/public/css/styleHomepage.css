@@ -3,12 +3,14 @@
   font-family: Montello_DEMO;
   src: url('/fonts/Montello_DEMO.otf');
 }
-
+body{
+  background: url('/img/project.svg') no-repeat; 
+}
 html,
 body,
 header,
 .view {
-  height: 100vh;  
+  height: 100vh; 
   font-family: Montello_DEMO;
   src: url('/fonts/Montello_DEMO.otf');  
 }
@@ -47,8 +49,8 @@ header {
     100% 100%,
     0 calc(100% - 5vw)
   ); */    
-  background: url('/img/top.svg') no-repeat; 
-  background-size: 100vh;  
+  /* background: url('/img/top.svg') no-repeat;  */
+  /* background-size: 100vh;   */
   color: white;    
 }
 header h1{
@@ -56,8 +58,8 @@ header h1{
 }
 .section1{
   height: 1500px;        
-  background: url('/img/middle.svg') no-repeat;
-  background-size: 100vh;
+  /* background: url('/img/middle.svg') no-repeat; */
+  /* background-size: 100vh; */
   /* clip-path: polygon(
     0 0,
     100% 0,
@@ -81,18 +83,18 @@ header h1{
 .section3{
   height: 500px;   
   margin-top: 50px;  
-  background-color: white;  
+  /* background-color: white;  
   clip-path: polygon(
     100% 0, 100% 86%, 0 69%, 0 0
-  );
+  ); */
 }
 
 .section4{
   height: 900px;      
-  background-color: #7f82a0;  
+  /* background-color: #7f82a0;  
   clip-path: polygon(
     100% 28%, 100% 100%, 0 100%, 0 0
-  );
+  ); */
 }
 
 .padded-title{

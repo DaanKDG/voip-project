@@ -29,31 +29,29 @@
     </div>
 </header>
 <main>
-    <section class="section1">
-        <div class="container">         
-            <div class="circles">   
-                <div class="row">
-                    <div class="col-sm my-auto">
-                        <a href="#">
-                            <div class="circle1">                        
-                                <img src="{{ asset('img/kader1.svg') }}" alt="">    
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm my-auto">
-                        <a href="#">
-                            <div class="circle2">
-                                <img src="{{ asset('img/telefoon1.svg') }}" alt=""> 
-                            </div>
-                        </a>
-                    </div>  
-                    <div class="col-sm my-auto">
-                        <a href="#">
-                            <div class="circle3">
-                                <img src="{{ asset('img/contact1.svg') }}" alt=""> 
-                            </div>
-                        </a>
-                    </div>
+    <section class="section1 mt-4">
+        <div class="container">            
+            <div class="row">
+                <div class="col-sm my-auto">
+                    <a href="#">
+                        <div class="circle1">                        
+                            <img src="{{ asset('img/kader1.svg') }}" alt="">    
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm my-auto">
+                    <a href="#">
+                        <div class="circle2">
+                            <img src="{{ asset('img/telefoon1.svg') }}" alt=""> 
+                        </div>
+                    </a>
+                </div>  
+                <div class="col-sm my-auto">
+                    <a href="#">
+                        <div class="circle3">
+                            <img src="{{ asset('img/contact1.svg') }}" alt=""> 
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>  
@@ -61,9 +59,9 @@
     <section class="section2">        
         <div class="container-fluid">            
                 <div class="row"> 
-                    <div class="col col-lg-2 lus">
+                    {{-- <div class="col col-lg-2 lus">
                         <img src="{{ asset('img/lus5.svg') }}" alt="">  
-                    </div>  
+                    </div>   --}}
                     <div class="col padding-top">
                         <h1 class="text-center">Portretten van al onze bellers.</h1>
                         
