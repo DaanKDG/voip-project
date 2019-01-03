@@ -58,13 +58,13 @@
     </section> 
     <section class="section2">        
         <div class="container-fluid">            
-                <div class="row"> .
-                    <div class="col col-lg-2">
-                        <img src="{{ asset('img/lus5.svg') }}" alt="" style="width:40%;">  
+                <div class="row"> 
+                    <div class="col col-lg-2 lus">
+                        <img src="{{ asset('img/lus5.svg') }}" alt="">  
                     </div>  
-                    <div class="col">
+                    <div class="col padding-top">
                         <h1 class="text-center">Portretten van al onze bellers.</h1>
-                        <div class="col">
+                        
                             <div class="bommas">
                                 <img src="{{ asset('img/bommas.svg') }}" alt="">                       
                             </div>                                            
@@ -74,7 +74,7 @@
                                 <a href="#"><h2>Alle portretten bekijken =></h2></a>  
                             </div>
                         </div>      
-                    </div>            
+                                
                 </div>               
         </div>
     </section> 
@@ -107,13 +107,13 @@
             <form>
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">04 99 84 69 34</label>
-                    <div class="col-sm-10">
+                    <div class="col col-lg-6">
                         <input type="email" class="form-control" id="email" placeholder="e-mailadress">
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row ">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Hello@cava.com</label>
-                    <div class="col-sm-10">
+                    <div class="col col-lg-6">
                         <textarea type="text" class="form-control" id="message" placeholder="bericht..." rows="4"></textarea>
                     </div>
                 </div>
