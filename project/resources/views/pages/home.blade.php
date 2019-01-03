@@ -3,9 +3,9 @@
 @section('content')
 
 <header>        
-    <!-- Navbar -->
-    <!-- Full Page Intro -->
-    <div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-color: #7f82a0;  background-size: cover; background-position: center center;">
+    <div class="section0">
+    <!-- Full Page Intro -->    
+    <div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-size: cover; background-position: center center;">
         <!-- Mask & flexbox options-->
         <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
         <!-- Content -->        
@@ -26,32 +26,34 @@
         </div>
         <!-- Mask & flexbox options-->
     </div>
-    <!-- Full Page Intro -->
+    </div>
 </header>
 <main>
-    <section class="section1 mt-4">
-        <div class="container">            
-            <div class="row">
-                <div class="col-sm my-auto">
-                    <a href="#">
-                        <div class="circle1">                        
-                            <img src="{{ asset('img/kader1.svg') }}" alt="">    
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm my-auto">
-                    <a href="#">
-                        <div class="circle2">
-                            <img src="{{ asset('img/telefoon1.svg') }}" alt=""> 
-                        </div>
-                    </a>
-                </div>  
-                <div class="col-sm my-auto">
-                    <a href="#">
-                        <div class="circle3">
-                            <img src="{{ asset('img/contact1.svg') }}" alt=""> 
-                        </div>
-                    </a>
+    <section class="section1">
+        <div class="container">         
+            <div class="circles">   
+                <div class="row">
+                    <div class="col-sm my-auto">
+                        <a href="#">
+                            <div class="circle1">                        
+                                <img src="{{ asset('img/kader1.svg') }}" alt="">    
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm my-auto">
+                        <a href="#">
+                            <div class="circle2">
+                                <img src="{{ asset('img/telefoon1.svg') }}" alt=""> 
+                            </div>
+                        </a>
+                    </div>  
+                    <div class="col-sm my-auto">
+                        <a href="#">
+                            <div class="circle3">
+                                <img src="{{ asset('img/contact1.svg') }}" alt=""> 
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>  

@@ -49,7 +49,7 @@ export default {
 
               console.log(test);
               var callClient = sinchClient.getCallClient();
-              var call = callClient.callUser(this.loaction);
+              var call = callClient.callUser(this.location);
               call.addEventListener(callListeners); 
             
           }

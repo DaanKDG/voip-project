@@ -8,10 +8,9 @@ html,
 body,
 header,
 .view {
-  height: 100vh;
-  background-color: white;
+  height: 100vh;  
   font-family: Montello_DEMO;
-  src: url('/fonts/Montello_DEMO.otf');
+  src: url('/fonts/Montello_DEMO.otf');  
 }
 
 @media (max-width: 740px) {
@@ -36,43 +35,47 @@ h5 {
 /*Eigen css */
 
 .header-img {
-  padding-top: 15%;
+  padding-top: 10%;
   padding-bottom: 5%;
 }
 
-header{
-  position: relative;    
-  clip-path: polygon(
+header {
+  /* position: relative;     */
+  /* clip-path: polygon(
     0 0,
     100% 0,
     100% 100%,
     0 calc(100% - 5vw)
-  );
-  color: white;
+  ); */    
+  background: url('/img/top.svg') no-repeat; 
+  background-size: 100vh;  
+  color: white;    
 }
-
 header h1{
   margin-bottom: 5%;
 }
 .section1{
-  height: 350px;    
-  margin-top: -5vw;
-  background-color: white;  
-  clip-path: polygon(
+  height: 1500px;        
+  background: url('/img/middle.svg') no-repeat;
+  background-size: 100vh;
+  /* clip-path: polygon(
     0 0,
     100% 0,
     100% 100%,
     0 calc(100% - 5vw)
-  ); 
+  );  */
+}
+.circles{
+  padding-top: 15%;
 }
 
 .section2{
   height: 1000px;    
   margin-top: -5vw;
   background-color: #7f82a0;  
-  clip-path: polygon(
+  /* clip-path: polygon(
     100% 0, 100% 80%, 0 100%, 0 21%
-  );
+  ); */
 }
 
 .section3{
@@ -152,7 +155,7 @@ header h1{
 
 /* SECTION 2 */
 .section2{
-  overflow: hidden;
+  overflow: hidden;  
 }
 .section2 .padding-top{
   padding-top: 15%;  
