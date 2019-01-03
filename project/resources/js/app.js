@@ -21,6 +21,8 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
 Vue.component('call-component', require('./components/CallComponent.vue'));
+Vue.component('set-call', require('./components/setCall.vue'));
+Vue.component('login-form', require('./components/Auth.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
