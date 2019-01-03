@@ -42,6 +42,7 @@
             }
         },
         mounted() {
+            console.log(test);
         },
         components: {
             setCall

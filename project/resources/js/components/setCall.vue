@@ -2,19 +2,27 @@
 <div class="config-call" v-show="loggedIn">
     <div class="form-group">
         <p>Hey, {{this.user}}</p>                       
-        <label for="exampleFormControlSelect1">Kies de locatie</label>
-        <select class="form-control" id="exampleFormControlSelect1">
+        <label for="recipient">Kies de locatie</label>
+            <input type="text" v-model="location" class="form-control" id="recipient" placeholder="">
+
+        <!-- <select v-model="location" class="form-control" id="exampleFormControlSelect1">
             <option style="padding: 20px !important;">Niky</option>
             <option>Lore</option>
             <option>Daan</option>
-        </select>
+        </select> -->
     </div>
     <a v-on:click="makeCallRequest" class="btn btn-outline-light">Start gesprek</a>
+        <div class="call-section">
+        <p>{{this.status}}</p>
+    </div>
+
 </div>
        
 </template>
 
 <script>
+
+
 export default {
   name: 'set-call',
 
@@ -28,11 +36,23 @@ export default {
         default: "",
     }
   },
+  data() {
+      return {
+          location: null,
+          status: "some string",
+      }
+  },
   methods: {
+      
       makeCallRequest() {
-          console.log(sinchClient.user.userId);
-          var call = sinchClient.callUser('');
-          call.addEventListener(); 
+          if(this.location) {
+
+              console.log(test);
+              var callClient = sinchClient.getCallClient();
+              var call = callClient.callUser(this.loaction);
+              call.addEventListener(callListeners); 
+            
+          }
       }
 
   },

@@ -47602,7 +47602,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       loggedIn: false
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    console.log(test);
+  },
   components: {
     setCall: __WEBPACK_IMPORTED_MODULE_1__setCall___default.a
   },
@@ -47673,7 +47675,43 @@ sinchClient = new SinchClient({
     console.log(msg);
   }
 });
+test = "Logging something";
 var sessionName = 'sinchSessionWEB-' + sinchClient.applicationKey;
+callListeners = {
+  onCallProgressing: function onCallProgressing(call) {
+    // audioProgress.src = 'style/ringback.wav';
+    // audioProgress.loop = true;
+    // audioProgress.play();
+    //Report call stats
+    console.log("trying to call");
+    this.status = "ringing";
+  },
+  onCallEstablished: function onCallEstablished(call) {
+    audioIncoming.srcObject = call.incomingStream;
+    audioIncoming.play();
+    audioProgress.pause();
+    audioRingTone.pause(); //Report call stats
+
+    var callDetails = call.getDetails();
+    $('div#callLog').append('<div id="stats">Answered at: ' + (callDetails.establishedTime && new Date(callDetails.establishedTime)) + '</div>');
+  },
+  onCallEnded: function onCallEnded(call) {
+    audioProgress.pause();
+    audioRingTone.pause();
+    audioIncoming.srcObject = null;
+    $('button').removeClass('incall');
+    $('button').removeClass('callwaiting'); //Report call stats
+
+    var callDetails = call.getDetails();
+    $('div#callLog').append('<div id="stats">Ended: ' + new Date(callDetails.endedTime) + '</div>');
+    $('div#callLog').append('<div id="stats">Duration (s): ' + callDetails.duration + '</div>');
+    $('div#callLog').append('<div id="stats">End cause: ' + call.getEndCause() + '</div>');
+
+    if (call.error) {
+      $('div#callLog').append('<div id="stats">Failure message: ' + call.error.message + '</div>');
+    }
+  }
+};
 
 /***/ }),
 /* 44 */
@@ -47681,6 +47719,12 @@ var sessionName = 'sinchSessionWEB-' + sinchClient.applicationKey;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47709,11 +47753,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       default: ""
     }
   },
+  data: function data() {
+    return {
+      location: null,
+      status: "some string"
+    };
+  },
   methods: {
     makeCallRequest: function makeCallRequest() {
-      console.log(sinchClient.user.userId);
-      var call = sinchClient.callUser('');
-      call.addEventListener();
+      if (this.location) {
+        console.log(test);
+        var callClient = sinchClient.getCallClient();
+        var call = callClient.callUser(this.loaction);
+        call.addEventListener(callListeners);
+      }
     }
   }
 });
@@ -47743,11 +47796,31 @@ var render = function() {
       _c("div", { staticClass: "form-group" }, [
         _c("p", [_vm._v("Hey, " + _vm._s(this.user))]),
         _vm._v(" "),
-        _c("label", { attrs: { for: "exampleFormControlSelect1" } }, [
+        _c("label", { attrs: { for: "recipient" } }, [
           _vm._v("Kies de locatie")
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.location,
+              expression: "location"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "recipient", placeholder: "" },
+          domProps: { value: _vm.location },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.location = $event.target.value
+            }
+          }
+        })
       ]),
       _vm._v(" "),
       _c(
@@ -47757,33 +47830,15 @@ var render = function() {
           on: { click: _vm.makeCallRequest }
         },
         [_vm._v("Start gesprek")]
-      )
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "call-section" }, [
+        _c("p", [_vm._v(_vm._s(this.status))])
+      ])
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      {
-        staticClass: "form-control",
-        attrs: { id: "exampleFormControlSelect1" }
-      },
-      [
-        _c("option", { staticStyle: { padding: "20px !important" } }, [
-          _vm._v("Niky")
-        ]),
-        _vm._v(" "),
-        _c("option", [_vm._v("Lore")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("Daan")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
