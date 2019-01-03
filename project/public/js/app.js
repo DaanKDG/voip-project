@@ -47676,42 +47676,31 @@ sinchClient = new SinchClient({
   }
 });
 test = "Logging something";
-var sessionName = 'sinchSessionWEB-' + sinchClient.applicationKey;
-callListeners = {
+sessionName = 'sinchSessionWEB-' + sinchClient.applicationKey;
+callListener = {
   onCallProgressing: function onCallProgressing(call) {
-    // audioProgress.src = 'style/ringback.wav';
-    // audioProgress.loop = true;
-    // audioProgress.play();
-    //Report call stats
-    console.log("trying to call");
-    this.status = "ringing";
+    $('div#callLog').append("<div>Ringing...</div>");
   },
   onCallEstablished: function onCallEstablished(call) {
-    audioIncoming.srcObject = call.incomingStream;
-    audioIncoming.play();
-    audioProgress.pause();
-    audioRingTone.pause(); //Report call stats
-
-    var callDetails = call.getDetails();
-    $('div#callLog').append('<div id="stats">Answered at: ' + (callDetails.establishedTime && new Date(callDetails.establishedTime)) + '</div>');
+    $('audio#incoming').attr('src', call.incomingStreamURL);
+    $('div#callLog').append("<div>Call answered</div>");
   },
   onCallEnded: function onCallEnded(call) {
-    audioProgress.pause();
-    audioRingTone.pause();
-    audioIncoming.srcObject = null;
-    $('button').removeClass('incall');
-    $('button').removeClass('callwaiting'); //Report call stats
-
-    var callDetails = call.getDetails();
-    $('div#callLog').append('<div id="stats">Ended: ' + new Date(callDetails.endedTime) + '</div>');
-    $('div#callLog').append('<div id="stats">Duration (s): ' + callDetails.duration + '</div>');
-    $('div#callLog').append('<div id="stats">End cause: ' + call.getEndCause() + '</div>');
-
-    if (call.error) {
-      $('div#callLog').append('<div id="stats">Failure message: ' + call.error.message + '</div>');
-    }
+    $('audio#incoming').removeAttr('src');
+    $('button#call').removeAttr('disabled');
+    $('button#answer').removeAttr('disabled');
+    $('div#callLog').append("<div>Call ended</div>");
   }
 };
+callClient = sinchClient.getCallClient();
+var call;
+callClient.addEventListener({
+  onIncomingCall: function onIncomingCall(incomingCall) {
+    $('div#callLog').append("<div>Incoming call from " + incomingCall.fromId + "</div>");
+    call = incomingCall;
+    call.addEventListener(callListener);
+  }
+});
 
 /***/ }),
 /* 44 */
@@ -47719,8 +47708,6 @@ callListeners = {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
 //
 //
 //
@@ -47762,10 +47749,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     makeCallRequest: function makeCallRequest() {
       if (this.location) {
-        console.log(test);
         var callClient = sinchClient.getCallClient();
-        var call = callClient.callUser(this.loaction);
-        call.addEventListener(callListeners);
+        var call = callClient.callUser(this.location);
+        call.addEventListener(callListener);
       }
     }
   }
@@ -47832,9 +47818,7 @@ var render = function() {
         [_vm._v("Start gesprek")]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "call-section" }, [
-        _c("p", [_vm._v(_vm._s(this.status))])
-      ])
+      _c("div", { attrs: { id: "callLog" } })
     ]
   )
 }

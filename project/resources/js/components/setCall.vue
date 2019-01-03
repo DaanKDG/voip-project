@@ -12,9 +12,7 @@
         </select> -->
     </div>
     <a v-on:click="makeCallRequest" class="btn btn-outline-light">Start gesprek</a>
-        <div class="call-section">
-        <p>{{this.status}}</p>
-    </div>
+    <div id="callLog"></div>
 
 </div>
        
@@ -43,15 +41,14 @@ export default {
       }
   },
   methods: {
-      
+    
       makeCallRequest() {
           if(this.location) {
 
-              console.log(test);
-              var callClient = sinchClient.getCallClient();
-              var call = callClient.callUser(this.location);
-              call.addEventListener(callListeners); 
-            
+             var callClient = sinchClient.getCallClient();
+             var call = callClient.callUser(this.location);
+             call.addEventListener(callListener);
+                       
           }
       }
 
