@@ -3,9 +3,9 @@
 @section('content')
 
 <header>        
-    <!-- Navbar -->
-    <!-- Full Page Intro -->
-    <div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-color: #7f82a0;  background-size: cover; background-position: center center;">
+    <div class="section0">
+    <!-- Full Page Intro -->    
+    <div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-size: cover; background-position: center center;">
         <!-- Mask & flexbox options-->
         <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
         <!-- Content -->        
@@ -26,7 +26,7 @@
         </div>
         <!-- Mask & flexbox options-->
     </div>
-    <!-- Full Page Intro -->
+    </div>
 </header>
 <main>
     <section class="section1 mt-4">
@@ -59,9 +59,9 @@
     <section class="section2">        
         <div class="container-fluid">            
                 <div class="row"> 
-                    <div class="col col-lg-2 lus">
+                    {{-- <div class="col col-lg-2 lus">
                         <img src="{{ asset('img/lus5.svg') }}" alt="">  
-                    </div>  
+                    </div>   --}}
                     <div class="col padding-top">
                         <h1 class="text-center">Portretten van al onze bellers.</h1>
                         
