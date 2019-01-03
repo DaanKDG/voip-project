@@ -30,15 +30,12 @@ callListener = {
 	}
 }
 
-callClient = sinchClient.getCallClient();
-var call;
-
 callClient.addEventListener({
-  onIncomingCall: function(incomingCall) {
-	$('div#callLog').append("<div>Incoming call from " + incomingCall.fromId + "</div>");
+    onIncomingCall: function(incomingCall) {
+    $('div#callLog').append("<div>Incoming call from " + incomingCall.fromId + "</div>");
 
     call = incomingCall;
     call.addEventListener(callListener);
-  }
+    }
 });
 

@@ -47692,8 +47692,6 @@ callListener = {
     $('div#callLog').append("<div>Call ended</div>");
   }
 };
-callClient = sinchClient.getCallClient();
-var call;
 callClient.addEventListener({
   onIncomingCall: function onIncomingCall(incomingCall) {
     $('div#callLog').append("<div>Incoming call from " + incomingCall.fromId + "</div>");
@@ -47749,7 +47747,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     makeCallRequest: function makeCallRequest() {
       if (this.location) {
-        var callClient = sinchClient.getCallClient();
+        callClient = sinchClient.getCallClient();
         var call = callClient.callUser(this.location);
         call.addEventListener(callListener);
       }

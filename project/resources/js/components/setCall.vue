@@ -45,7 +45,7 @@ export default {
       makeCallRequest() {
           if(this.location) {
 
-             var callClient = sinchClient.getCallClient();
+             callClient = sinchClient.getCallClient();
              var call = callClient.callUser(this.location);
              call.addEventListener(callListener);
                        
