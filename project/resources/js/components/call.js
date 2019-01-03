@@ -12,43 +12,33 @@ sinchClient = new SinchClient({
 
 test = "Logging something";
 
-var sessionName = 'sinchSessionWEB-' + sinchClient.applicationKey;
+sessionName = 'sinchSessionWEB-' + sinchClient.applicationKey;
 
-callListeners = {
+callListener = {
 	onCallProgressing: function(call) {
-		// audioProgress.src = 'style/ringback.wav';
-		// audioProgress.loop = true;
-		// audioProgress.play();
-
-        //Report call stats
-        console.log("trying to call");
-		this.status = "ringing";
+		$('div#callLog').append("<div>Ringing...</div>");
 	},
 	onCallEstablished: function(call) {
-		audioIncoming.srcObject = call.incomingStream;
-		audioIncoming.play();
-		audioProgress.pause();
-		audioRingTone.pause();
-
-		//Report call stats
-		var callDetails = call.getDetails();
-		$('div#callLog').append('<div id="stats">Answered at: '+(callDetails.establishedTime && new Date(callDetails.establishedTime))+'</div>');
+        $('audio#incoming').attr('src', call.incomingStreamURL);
+		$('div#callLog').append("<div>Call answered</div>");
 	},
 	onCallEnded: function(call) {
-		audioProgress.pause();
-		audioRingTone.pause();
-		audioIncoming.srcObject = null;
-
-		$('button').removeClass('incall');
-		$('button').removeClass('callwaiting');
-
-		//Report call stats
-		var callDetails = call.getDetails();
-		$('div#callLog').append('<div id="stats">Ended: '+new Date(callDetails.endedTime)+'</div>');
-		$('div#callLog').append('<div id="stats">Duration (s): '+callDetails.duration+'</div>');
-		$('div#callLog').append('<div id="stats">End cause: '+call.getEndCause()+'</div>');
-		if(call.error) {
-			$('div#callLog').append('<div id="stats">Failure message: '+call.error.message+'</div>');
-		}
-    }
+        $('audio#incoming').removeAttr('src');
+		$('button#call').removeAttr('disabled');
+		$('button#answer').removeAttr('disabled');
+		$('div#callLog').append("<div>Call ended</div>");
+	}
 }
+
+callClient = sinchClient.getCallClient();
+var call;
+
+callClient.addEventListener({
+  onIncomingCall: function(incomingCall) {
+	$('div#callLog').append("<div>Incoming call from " + incomingCall.fromId + "</div>");
+
+    call = incomingCall;
+    call.addEventListener(callListener);
+  }
+});
+
