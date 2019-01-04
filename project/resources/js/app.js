@@ -33,3 +33,4 @@ Vue.component('login-form', require('./components/Auth.vue'));
 const app = new Vue({
     el: '#app'
 });
+

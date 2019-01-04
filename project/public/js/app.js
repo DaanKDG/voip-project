@@ -14030,9 +14030,9 @@ module.exports = Cancel;
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(44)
+var __vue_script__ = __webpack_require__(43)
 /* template */
-var __vue_template__ = __webpack_require__(45)
+var __vue_template__ = __webpack_require__(44)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -14075,7 +14075,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);
-module.exports = __webpack_require__(50);
+module.exports = __webpack_require__(49);
 
 
 /***/ }),
@@ -14102,7 +14102,7 @@ window.Vue = __webpack_require__(38);
 
 Vue.component('call-component', __webpack_require__(41));
 Vue.component('set-call', __webpack_require__(12));
-Vue.component('login-form', __webpack_require__(47));
+Vue.component('login-form', __webpack_require__(46));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -47513,7 +47513,7 @@ var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(42)
 /* template */
-var __vue_template__ = __webpack_require__(46)
+var __vue_template__ = __webpack_require__(45)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -47557,10 +47557,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__call__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__call___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__call__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__setCall__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__setCall___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__setCall__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__setCall__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__setCall___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__setCall__);
 //
 //
 //
@@ -47590,11 +47588,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
- // import Auth from './Auth';
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
+    var sinchClient = new SinchClient({
+      applicationKey: "eecba48e-53a8-4e46-8adc-b3988f651404",
+      capabilities: {
+        messaging: true,
+        calling: true
+      },
+      supportActiveConnection: true,
+      onLogMessage: function onLogMessage(msg) {
+        console.log(msg);
+      }
+    });
+    Vue.use({
+      install: function install(Vue) {
+        Object.defineProperty(Vue.prototype, "$sinchClient", {
+          get: function get() {
+            return sinchClient;
+          }
+        });
+      }
+    });
     return {
       username: null,
       name: null,
@@ -47603,35 +47638,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   mounted: function mounted() {
-    console.log(test);
-  },
-  components: {
-    setCall: __WEBPACK_IMPORTED_MODULE_1__setCall___default.a
+    var test = "some string";
   },
   methods: {
     newUserRequest: function newUserRequest() {
       var _this = this;
 
-      console.log(this.name, this.password);
-
       if (this.name && this.password) {
+        console.log(this.test);
+
         var handleSuccess = function handleSuccess() {
-          console.log('User created');
+          console.log("User created");
           _this.loggedIn = true;
-          _this.name = sinchClient.user.userId;
         };
 
         var handleFail = function handleFail(error) {
           console.log(error.message);
         };
 
-        var signUpObject = {
-          username: this.name,
-          password: this.password
-        };
-        sinchClient.newUser(signUpObject).then(sinchClient.start.bind(sinchClient)).then(function () {
-          localStorage['sinchSession-' + sinchClient.applicationKey] = JSON.stringify(sinchClient.getSession());
-        }).then(handleSuccess).fail(handleFail);
+        axios.post("/api/auth", {
+          name: this.name
+        }).then(function (res) {
+          _this.$sinchClient.start(res.data);
+        }).then(handleSuccess).catch(handleFail); // var signUpObject = { username: this.name, password: this.password };
+        // this.$sinchClient
+        //   .newUser(signUpObject)
+        //   .then(() => {this.$sinchClient.start.bind(this.$sinchClient);
+        //   this.$sinchClient.startActiveConnection();})
+        //   .then(() => {
+        //     localStorage[
+        //       "sinchSession-" + this.$sinchClient.applicationKey
+        //     ] = JSON.stringify(this.$sinchClient.getSession());
+        //   })
+        //   .then(handleSuccess)
+        //   .fail(handleFail);
       }
     },
     logInRequest: function logInRequest() {
@@ -47639,7 +47679,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       if (this.name && this.password) {
         var handleSuccess = function handleSuccess() {
-          console.log('User logged in');
+          console.log("User logged in");
           _this2.loggedIn = true;
           _this2.name = sinchClient.user.userId;
         };
@@ -47653,7 +47693,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           password: this.password
         };
         sinchClient.start(signUpObject).then(function () {
-          localStorage['sinchSession-' + sinchClient.applicationKey] = JSON.stringify(sinchClient.getSession());
+          localStorage["sinchSession-" + sinchClient.applicationKey] = JSON.stringify(sinchClient.getSession());
         }).then(handleSuccess).fail(handleFail);
       }
     }
@@ -47662,50 +47702,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 /* 43 */
-/***/ (function(module, exports) {
-
-sinchClient = new SinchClient({
-  applicationKey: '5d69f5a3-1809-4974-bffd-dff5de967a37',
-  capabilities: {
-    messaging: true,
-    calling: true
-  },
-  supportActiveConnection: true,
-  onLogMessage: function onLogMessage(msg) {
-    console.log(msg);
-  }
-});
-test = "Logging something";
-sessionName = 'sinchSessionWEB-' + sinchClient.applicationKey;
-callListener = {
-  onCallProgressing: function onCallProgressing(call) {
-    $('div#callLog').append("<div>Ringing...</div>");
-  },
-  onCallEstablished: function onCallEstablished(call) {
-    $('audio#incoming').attr('src', call.incomingStreamURL);
-    $('div#callLog').append("<div>Call answered</div>");
-  },
-  onCallEnded: function onCallEnded(call) {
-    $('audio#incoming').removeAttr('src');
-    $('button#call').removeAttr('disabled');
-    $('button#answer').removeAttr('disabled');
-    $('div#callLog').append("<div>Call ended</div>");
-  }
-};
-callClient.addEventListener({
-  onIncomingCall: function onIncomingCall(incomingCall) {
-    $('div#callLog').append("<div>Incoming call from " + incomingCall.fromId + "</div>");
-    call = incomingCall;
-    call.addEventListener(callListener);
-  }
-});
-
-/***/ }),
-/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -47739,24 +47740,80 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   data: function data() {
+    var callListener = {
+      onCallProgressing: function onCallProgressing(call) {
+        console.log(call);
+        $("div#callLog").append("<div>Ringing...</div>");
+      },
+      onCallEstablished: function onCallEstablished(call) {
+        // $("audio#incoming").attr("src", call.incomingStreamURL);
+        $("div#callLog").append("<div>Call answered</div>");
+      },
+      onCallEnded: function onCallEnded(call) {
+        // $("audio#incoming").removeAttr("src");
+        // $("button#call").removeAttr("disabled");
+        // $("button#answer").removeAttr("disabled");
+        $("div#callLog").append("<div>Call ended</div>");
+      }
+    };
+    Vue.use({
+      install: function install(Vue) {
+        Object.defineProperty(Vue.prototype, "$callListener", {
+          get: function get() {
+            return callListener;
+          }
+        });
+      }
+    });
+    var callClient = this.$sinchClient.getCallClient();
+    Vue.use({
+      install: function install(Vue) {
+        Object.defineProperty(Vue.prototype, "$callClient", {
+          get: function get() {
+            return callClient;
+          }
+        });
+      }
+    });
     return {
       location: null,
       status: "some string"
     };
   },
+  mounted: function mounted() {
+    this.$sinchClient.startActiveConnection();
+    this.$callClient.addEventListener({
+      onIncomingCall: function onIncomingCall(incomingCall) {
+        //Play some groovy tunes & show UI
+        $("div#callLog").append("<div>Receiving a call" + incomingCall.fromId + ".</div>");
+        call = incomingCall; //Add event listeners to the new call object representing the incoming call
+
+        call.addEventListener(this.$callListener);
+      }
+    });
+  },
   methods: {
     makeCallRequest: function makeCallRequest() {
       if (this.location) {
-        callClient = sinchClient.getCallClient();
-        var call = callClient.callUser(this.location);
-        call.addEventListener(callListener);
+        //   console.log(this.$callListener);
+        var call = this.$callClient.callUser(this.location);
+        call.addEventListener(this.$callListener); //   var call = callObj.callClient.callUser(this.location);
+        //    call.addEventListener(callObj.callListener);
+      }
+    },
+    takeCall: function takeCall() {
+      try {
+        call.answer(); // $('button#answer').attr('disabled', 'disabled');
+        // $('button#call').attr('disabled', 'disabled');
+      } catch (error) {
+        console.log(error);
       }
     }
   }
 });
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47816,7 +47873,17 @@ var render = function() {
         [_vm._v("Start gesprek")]
       ),
       _vm._v(" "),
-      _c("div", { attrs: { id: "callLog" } })
+      _c("div", { attrs: { id: "callLog" } }),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-light",
+          attrs: { href: "#" },
+          on: { click: _vm.takeCall }
+        },
+        [_vm._v("Take the call")]
+      )
     ]
   )
 }
@@ -47831,7 +47898,7 @@ if (false) {
 }
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -48003,15 +48070,15 @@ if (false) {
 }
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(48)
+var __vue_script__ = __webpack_require__(47)
 /* template */
-var __vue_template__ = __webpack_require__(49)
+var __vue_template__ = __webpack_require__(48)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48050,11 +48117,9 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 48 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 47 */
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -48073,171 +48138,70 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Auth',
-  data: function data() {
-    return {
-      username: null,
-      name: null,
-      password: null,
-      loggedIn: false
-    };
-  },
-  methods: {
-    newUserRequest: function newUserRequest() {
-      var _this = this;
-
-      if (this.name && this.password) {
-        var handleSuccess = function handleSuccess() {
-          _this.loggedIn = true;
-        };
-
-        var handleFail = function handleFail(error) {
-          console.log(error.message);
-        };
-
-        var signUpObject = {
-          username: this.name,
-          password: this.password
-        };
-        sinchClient.newUser(signUpObject).then(sinchClient.start.bind(sinchClient)).then(function () {
-          localStorage['sinchSession-' + sinchClient.applicationKey] = JSON.stringify(sinchClient.getSession());
-        }).then(handleSuccess).fail(handleFail);
-      }
-    },
-    logInRequest: function logInRequest() {
-      if (this.name && this.password) {
-        var signUpObject = {
-          username: this.name,
-          password: this.password
-        };
-        sinchClient.start(signUpObject).then(function () {
-          localStorage['sinchSession-' + sinchClient.applicationKey] = JSON.stringify(sinchClient.getSession());
-        }).then(handleSuccess).fail(handleFail);
-      }
-    }
-  }
-});
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      directives: [
-        {
-          name: "show",
-          rawName: "v-show",
-          value: !_vm.loggedIn,
-          expression: "!loggedIn"
-        }
-      ],
-      staticClass: "credentials"
-    },
-    [
-      _c("form", [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "name-field" } }, [_vm._v("Naam")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.name,
-                expression: "name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "name-field",
-              "aria-describedby": "emailHelp",
-              placeholder: "Kies een gebruikersnaam"
-            },
-            domProps: { value: _vm.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.name = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "small",
-            { staticClass: "form-text text-muted", attrs: { id: "emailHelp" } },
-            [_vm._v("Al een account? Klik na het invullen op de log in button")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "password-field" } }, [
-            _vm._v("Wachtwoord")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.password,
-                expression: "password"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "password",
-              id: "password-field",
-              placeholder: "Password"
-            },
-            domProps: { value: _vm.password },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.password = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-light",
-            staticStyle: { color: "black" },
-            on: { click: _vm.newUserRequest }
-          },
-          [_vm._v("Registreer")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-dark",
-            on: {
-              click: function($event) {
-                _vm.logInRequest()
-              }
-            }
-          },
-          [_vm._v("Log in")]
-        )
-      ])
-    ]
-  )
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "credentials" }, [
+      _c("form", { attrs: { id: "auth" } }, [
+        _c("input", { attrs: { id: "username", placeholder: "username" } }),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { id: "password", type: "password", placeholder: "password" }
+        }),
+        _vm._v(" "),
+        _c("button", { attrs: { id: "loginUser" } }, [_vm._v("Login")]),
+        _vm._v(" "),
+        _c("button", { attrs: { id: "createUser" } }, [_vm._v("Signup")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" }, attrs: { id: "call" } }, [
+        _vm._v("       \n        current user: "),
+        _c("span", { attrs: { id: "username" } }),
+        _vm._v(" "),
+        _c("form", [
+          _c("input", {
+            attrs: { id: "callUsername", placeholder: "username" }
+          }),
+          _c("br"),
+          _vm._v(" "),
+          _c("button", { attrs: { id: "call" } }, [_vm._v("Call")]),
+          _vm._v(" "),
+          _c("button", { attrs: { id: "hangup" } }, [_vm._v("Hangup")]),
+          _vm._v(" "),
+          _c("button", { attrs: { id: "answer" } }, [_vm._v("Answer")]),
+          _vm._v(" "),
+          _c("audio", { attrs: { id: "incoming", autoplay: "" } }),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "callLog" } })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "error" })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -48248,7 +48212,7 @@ if (false) {
 }
 
 /***/ }),
-/* 50 */
+/* 49 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

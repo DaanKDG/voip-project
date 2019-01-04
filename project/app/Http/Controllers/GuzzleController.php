@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\TicketGenerator;
+use DateTime;
+
 
 
 class GuzzleController extends Controller
 {
-    public function index()
+    public function ticket(Request $request)
     {
+        $generator = new TicketGenerator('eecba48e-53a8-4e46-8adc-b3988f651404', 'cqmFwVxoYE2uCKWeSFySBg==');
+        $signedUserTicket = $generator->generateTicket($request->input('name'), new DateTime(), 3600);
         
-    }
-    public function getSeason() {
-        $client = new Client();
-        $uri = '';
-        $header = ['headers' => ['X-Auth-Token' => '6e6a87e2f21340fb837874fbe8cf6c1b']];
-        $res = $client->get($uri, $header);
-        return json_decode($res->getBody()->getContents(), true);
+        return ['userTicket' => $signedUserTicket];
+        
     }
 }
