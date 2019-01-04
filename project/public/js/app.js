@@ -47776,6 +47776,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     });
     return {
+      call: null,
       location: null,
       status: "some string"
     };
@@ -47786,9 +47787,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       onIncomingCall: function onIncomingCall(incomingCall) {
         //Play some groovy tunes & show UI
         $("div#callLog").append("<div>Receiving a call" + incomingCall.fromId + ".</div>");
-        call = incomingCall; //Add event listeners to the new call object representing the incoming call
+        this.call = incomingCall; //Add event listeners to the new call object representing the incoming call
 
-        call.addEventListener(this.$callListener);
+        this.call.addEventListener(this.$callListener);
       }
     });
   },
@@ -47796,8 +47797,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     makeCallRequest: function makeCallRequest() {
       if (this.location) {
         //   console.log(this.$callListener);
-        var call = this.$callClient.callUser(this.location);
-        call.addEventListener(this.$callListener); //   var call = callObj.callClient.callUser(this.location);
+        this.call = this.$callClient.callUser(this.location);
+        this.call.addEventListener(this.$callListener); //   var call = callObj.callClient.callUser(this.location);
         //    call.addEventListener(callObj.callListener);
       }
     },

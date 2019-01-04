@@ -71,6 +71,7 @@ export default {
       }
     });
       return {
+          call: null,
           location: null,
           status: "some string",
       }
@@ -84,10 +85,10 @@ export default {
     onIncomingCall: function(incomingCall) {
         //Play some groovy tunes & show UI
         $("div#callLog").append("<div>Receiving a call" + incomingCall.fromId + ".</div>");
-        call = incomingCall;
+        this.call = incomingCall;
 
         //Add event listeners to the new call object representing the incoming call
-        call.addEventListener(this.$callListener);
+        this.call.addEventListener(this.$callListener);
     }
 });
 
@@ -98,9 +99,9 @@ export default {
           if(this.location) {
             //   console.log(this.$callListener);
               
-              var call = this.$callClient.callUser(this.location)
+              this.call = this.$callClient.callUser(this.location)
               
-              call.addEventListener(this.$callListener);
+              this.call.addEventListener(this.$callListener);
             
             //   var call = callObj.callClient.callUser(this.location);
             //    call.addEventListener(callObj.callListener);
